@@ -6,10 +6,10 @@ const EnterTask = (props) => {
         <div>
             <textarea 
                 id={props.id}
-                // value={props.value}
-                placeholder={props.placeholder}
+                value={props.value}
                 onChange = {props.onChange}
             />
+        
         </div>
     );
 };

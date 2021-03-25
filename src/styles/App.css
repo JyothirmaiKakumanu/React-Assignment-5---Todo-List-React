@@ -14,3 +14,20 @@ button{
 .bg-pink{
 	background-color:pink;
 }
+
+.container{
+    font-size: 35px;
+    padding: 30px;
+    margin: auto;
+}
+
+li button.edit{
+    position: absolute;
+    right: 50%;
+    font-size: 20px;
+}
+li button.delete{
+    position: absolute;
+    right: 40%;
+    font-size: 20px;
+}

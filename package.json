@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-native-fontawesome": "^0.2.6",
     "css-loader": "^4.3.0",
     "jest-junit": "^11.1.0",
     "react": "^16.13.1",
