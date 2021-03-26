@@ -52,12 +52,12 @@ function App()
 	}
 
 	const editItems=(id,value)=>{
-	taskArr.map(item=>{
-		if(item.id===id){
-			item.value = value;
-		}
-	})
-	setTaskArr(taskArr);
+		if (value !== "") {
+			setTaskArr((item) => {
+			  item[id] = value;
+			  return [...item];
+			});
+		  }
 }
 
 	return (
@@ -86,7 +86,7 @@ function App()
 						text={item}
 						value={item}
 						ondelete ={deleteItems}
-						// onEdit ={editItems}
+						onEdit ={editItems}
 					/>
 				)
 			})}
