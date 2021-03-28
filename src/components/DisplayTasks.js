@@ -23,7 +23,7 @@ const DisplayTasks = (props) => {
     return (
         <>
             {/* {props.taskArr.map((item,index)=>{ */}
-            <div className="container">
+            <div className="todo">
                 <li className ={props.className}
                 //  id = {props.id}
                 //  key={props.key}

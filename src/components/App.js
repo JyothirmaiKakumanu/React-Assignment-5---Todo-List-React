@@ -66,12 +66,13 @@ function App()
 		<br/>
 		<EnterTask id="task"
 			value={task}
+			type="text"
 			// onChange={(e)=>setTask(e.target.value)} 
 			onChange ={handleInput}
 			placeholder="Enter the task"/>
 		<br/>
 		<button id="btn"
-		type="submit"
+		
 			onClick={addItem}>
 			Add task
 		</button>
@@ -81,6 +82,8 @@ function App()
 				return (
 					<DisplayTasks
 						className ="list"
+						classNameDelete="delete"
+                		classNameEdit="edit"
 						key={index}
 						id={index}
 						text={item}

@@ -2,15 +2,16 @@ import React from 'react';
 
 const EnterTask = (props) => {
     
-    return (
-        <div>
-            <textarea 
+    return (        
+            <input 
                 id={props.id}
+                type={props.type}
                 value={props.value}
+                placeholder={props.placeholder}
                 onChange = {props.onChange}
             />
         
-        </div>
+        
     );
 };
 
