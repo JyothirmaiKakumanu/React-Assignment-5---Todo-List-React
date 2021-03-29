@@ -62,6 +62,7 @@ function App()
 
 	return (
 	<div id="main">
+		<form id="todoList">
 		<h1>ToDo List</h1>
 		<br/>
 		<EnterTask id="task"
@@ -69,13 +70,14 @@ function App()
 			type="text"
 			// onChange={(e)=>setTask(e.target.value)} 
 			onChange ={handleInput}
-			placeholder="Enter the task"/>
+			placeholder="Add the task"/>
 		<br/>
 		<button id="btn"
 		
 			onClick={addItem}>
 			Add task
 		</button>
+		</form>
 		<ol>
 			{taskArr.map((item,index)=>{
 				console.log("before return");

@@ -29,7 +29,7 @@ const DisplayTasks = (props) => {
                 //  key={props.key}
                 //   value={props.text}
                   >{props.text}</li>
-                  <button type="button" className="delete" onClick={()=>{
+                  <button type="button" className={props.classNameDelete} onClick={()=>{
                         props.ondelete(props.id)
                 }}>
                     Delete
@@ -56,7 +56,7 @@ const DisplayTasks = (props) => {
                              }}>Save</button> 
                              </>)
                              : 
-                             (<button type="button" className={props.className} onClick={addEdit}>
+                             (<button type="button" className={props.classNameEdit} onClick={addEdit}>
                                  Edit</button>
                              )}
             </div>
