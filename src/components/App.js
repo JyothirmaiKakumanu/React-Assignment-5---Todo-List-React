@@ -1,106 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, createRef, useRef } from "react";
 import "./../styles/App.css";
-import EnterTask from "./EnterTask";
-import DisplayTasks from "./DisplayTasks";
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import List from "./DisplayTasks";
 
-// library.add(faEdit);
+function App() {
+  const [task, settask] = useState({ task_name: "", edit: false });
+  const [list, setlist] = useState([]);
 
-function App() 
-{
-	// const [task,setTask] = useState({
-	// 	taskName: "",
-	// });
-	const [task,setTask] = useState('');
-	const [taskArr,setTaskArr]= useState([]);
+  const handleonchange = (e) => {
+    //setText(e.target.value)
+    //latest code.
 
+    settask({ task_name: e.target.value, edit: false });
+  };
 
-	const addItem=(e)=>{
-		e.preventDefault();
-		console.log(`inside add item`);
-		if(task !== ""){
-			console.log("inside add item if");
-			setTaskArr([...taskArr,task]);
-			setTask('');
-		}
-		console.log(`taskArr${taskArr}`);
-		taskArr.map((itm,index)=>{
-			console.log("inside map");
-			console.log("index"+index+"item"+itm);
-		})
-	}
+  const handlesave = (e) => {
+    //console.log(task);
 
-	const handleInput=(event)=>{
-		setTask(event.target.value);
-		console.log(`line28${task}`);
-	}
+    //settask(task=>[...task ,text]);
+    //console.log(task);
+    if (task.task_name != "") {
+      setlist((list) => [...list, task]);
+    }
+  };
+  const delete_todo_item = (element_tobe_deleted, i) => {
+    setlist(list.filter((t, index) => Number(i) != index));
+  };
+  const edit_todo_item = (element_tobe_edited, i) => {
+    var temp = list;
+    temp.map((ele, index) => {
+      if (ele.task_name == element_tobe_edited) {
+        ele.edit = true;
+      }
+    });
+    setlist((list) => [...list], temp);
+  };
 
-	const deleteItems=(id)=>{
-		console.log("inside del fnc");
-		// const arr = taskArr.slice();
-		 const filteredArr = taskArr.filter((item,index)=>{
-		 return index!==id});
-		 setTaskArr(filteredArr);
-		// setTaskArr((item) => {
-		// 	console.log("item"+item);
-		// 	return item.filter((arrEle, index) => {
-		// 	  return index !== id;
-		// 	});
-		// });
-		console.log("line47"+taskArr);
-	}
+  const handle_edit = (text, index) => {
+    //console.log(index);
+    var obj = list;
+    obj[index].task_name = text;
 
-	const editItems=(id,value)=>{
-		if (value !== "") {
-			setTaskArr((item) => {
-			  item[id] = value;
-			  return [...item];
-			});
-		  }
+    setlist((list) => [...list], obj);
+  };
+  const handle_edit_save_button = (i) => {
+    //setlist(list=> [...list] , obj)
+    var obj2 = list;
+
+    if (obj2[i].task_name != "") {
+      obj2[i].edit = false;
+
+      setlist((list) => [...list], obj2);
+    } else {
+      let temp = obj2.filter((inedx) => {
+        inedx != i;
+      });
+      setlist(temp);
+    }
+  };
+
+  return (
+    <div id="main">
+      <div className="input_boxes">
+        <textarea id="task" onChange={handleonchange}></textarea>
+        <button id="btn" onClick={handlesave}>
+          save
+        </button>
+      </div>
+      <List
+        list={list}
+        delete_todo_item={delete_todo_item}
+        edit_todo_item={edit_todo_item}
+        handle_edit={handle_edit}
+        handle_edit_save_button={handle_edit_save_button}
+      />
+    </div>
+  );
 }
-
-	return (
-	<div id="main">
-		<form id="todoList">
-		<h1>ToDo List</h1>
-		<br/>
-		<EnterTask id="task"
-			value={task}
-			type="text"
-			// onChange={(e)=>setTask(e.target.value)} 
-			onChange ={handleInput}
-			placeholder="Add the task"/>
-		<br/>
-		<button id="btn"
-		
-			onClick={addItem}>
-			Add task
-		</button>
-		</form>
-		<ol>
-			{taskArr.map((item,index)=>{
-				console.log("before return");
-				return (
-					<DisplayTasks
-						className ="list"
-						classNameDelete="delete"
-                		classNameEdit="edit"
-						key={index}
-						id={index}
-						text={item}
-						value={item}
-						ondelete ={deleteItems}
-						onEdit ={editItems}
-					/>
-				)
-			})}
-		</ol>
-	
-		
-	</div>
-	);
-}
-
 
 export default App;

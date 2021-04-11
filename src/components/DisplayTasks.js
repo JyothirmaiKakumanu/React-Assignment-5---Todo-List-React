@@ -1,67 +1,42 @@
-import React, { useState } from 'react';
-// import EditItem from './EditItem';
-// import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import React from 'react'
 
-
-const DisplayTasks = (props) => {
-    // console.log(`text${props.text}`);
-    console.log("inside display tasks");
-    const [editReq,seteditReq] = useState({show:false,});
-    const [editTask,setEdittask] = useState('');
-
-    console.log("in edit item component1");
+function InputTask({list , delete_todo_item,edit_todo_item,handle_edit,handle_edit_save_button  } ) {
+        
     
-    const addEdit=()=>{
-        console.log("in line 8");
-        seteditReq({show:true});
-    }
-    const editTaskFunc =(e)=>{
-        console.log("in line 12");
-        setEdittask(e.target.value);
-    }
+           
 
     return (
-        <>
-            {/* {props.taskArr.map((item,index)=>{ */}
-            <div className="todo">
-                <li className ={props.className}
-                //  id = {props.id}
-                //  key={props.key}
-                //   value={props.text}
-                  >{props.text}</li>
-                  <button type="button" className={props.classNameDelete} onClick={()=>{
-                        props.ondelete(props.id)
-                }}>
-                    Delete
-                </button>
+        <div className="list_view">
+        <ul>
+
+			
+        
+
+           {
+               list.map((obj,i)=>{
+
+
+                   return(<> <li key ={i} className="list">{obj.task_name}</li>
+                 <button className="delete"  onClick={()=> {delete_todo_item(obj.task_name ,i)}}>X</button>
+                 <button className="edit"  onClick={()=> {edit_todo_item(obj.task_name,i)}}>edit</button>
+                 {  obj.edit==true ?<div className="editingarea"><textarea className="editTask" 
+                    defaultValue={obj.task_name} 
+                    onChange={(e)=>{handle_edit(e.target.value , i)}}>
+                        </textarea> 
+                        <button className="saveTask" 
+                        onClick = { ()=>{handle_edit_save_button(i)}}>save</button></div>  :<></>}
+
+                   </>)}     )
+           
+           }
+               
+                  
                 
-
-
-                   {(editReq.show)?
-                            (
-                            <>
-                            <br/>
-                            <input type="text"
-                                //  key={props.key}
-                                //  value={props.value}
-                                 className="editTask"
-                                 placeholder="Edit"
-                                 onChange={editTaskFunc}
-                             />
-                             <button
-                             className="saveTask"
-                             onClick = {()=>{
-                                 props.onEdit(props.id,editTask);
-                                 seteditReq({show:false});
-                             }}>Save</button> 
-                             </>)
-                             : 
-                             (<button type="button" className={props.classNameEdit} onClick={addEdit}>
-                                 Edit</button>
-                             )}
-            </div>
+       </ul>
+       </div>
             
-        </>
-    );
-};
-export default DisplayTasks;
+        
+    )
+}
+
+export default InputTask;
