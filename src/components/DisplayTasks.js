@@ -13,26 +13,26 @@ function InputTask({
         {list.map((obj, i) => {
           return (
             <>
-              {" "}
               <li key={i} className="list">
                 {obj.task_name}
+
+                <button
+                  className="delete"
+                  onClick={() => {
+                    delete_todo_item(obj.task_name, i);
+                  }}
+                >
+                  X
+                </button>
+                <button
+                  className="edit"
+                  onClick={() => {
+                    edit_todo_item(obj.task_name, i);
+                  }}
+                >
+                  edit
+                </button>
               </li>
-              <button
-                className="delete"
-                onClick={() => {
-                  delete_todo_item(obj.task_name, i);
-                }}
-              >
-                X
-              </button>
-              <button
-                className="edit"
-                onClick={() => {
-                  edit_todo_item(obj.task_name, i);
-                }}
-              >
-                edit
-              </button>
               {obj.edit == true ? (
                 <div className="editingarea">
                   <textarea
@@ -51,9 +51,7 @@ function InputTask({
                     save
                   </button>
                 </div>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </>
           );
         })}
